@@ -1,6 +1,6 @@
 {
-    "name": "m1ome/phalcon-datatables",
-    "description": "DataTables adapter for Phalcon Framework",
+    "name": "gamalan/phalcon-datatables",
+    "description": "Fork of m1ome/phalcon-datatables\nA DataTables adapter for Phalcon Framework",
     "keywords": ["Phalcon", "DataTables", "Plugin"],
     "license": "MIT",
     "autoload": {
@@ -10,8 +10,8 @@
     },
     "authors": [
       {
-        "name": "Pavel Makarenko",
-        "email": "cryfall@gmail.com"
+        "name": "Gamal Abdul Nasser",
+        "email": "gamalanpro@gmail.com"
       }
     ],
     "minimum-stability": "dev",
@@ -24,7 +24,7 @@
       }
     },
     "require-dev": {
-      "crysalead/kahlan": "~1.1",
+      "kahlan/kahlan": "^3.1",
       "fzaninotto/faker": "1.5.*@dev"
     }
 }
