@@ -3,80 +3,93 @@ namespace DataTables;
 
 use Phalcon\Mvc\User\Component;
 
-class ParamsParser extends Component{
+class ParamsParser extends Component
+{
+    protected $params = [];
+    protected $page = 1;
 
-  protected $params = [];
-  protected $page   = 1;
+    public function __construct($limit)
+    {
+        $params = [
+            'draw' => null,
+            'start' => 1,
+            'length' => $limit,
+            'columns' => [],
+            'search' => [],
+            'order' => []
+        ];
+        $request = $this->di->get('request');
+        $requestParams = $request->isPost() ? $request->getPost() : $request->getQuery();
+        $this->params = (array)$requestParams + $params;
+        $this->setPage();
+    }
 
-  public function __construct($limit) {
-    $params = [
-      'draw'    => null,
-      'start'   => 1,
-      'length'  => $limit,
-      'columns' => [],
-      'search'  => [],
-      'order'   => []
-    ];
+    public function getParams()
+    {
+        return $this->params;
+    }
 
-    $request = $this->di->get('request');
-    $requestParams = $request->isPost() ? $request->getPost() : $request->getQuery();
-    $this->params = (array)$requestParams + $params;
-    $this->setPage();
-  }
+    public function setPage()
+    {
+        $this->page = (int)(floor($this->params['start'] / $this->params['length']) + 1);
+    }
 
-  public function getParams() {
-    return $this->params;
-  }
+    public function getPage()
+    {
+        return $this->page;
+    }
 
-  public function setPage() {
-    $this->page = (int)(floor($this->params['start'] / $this->params['length']) + 1);
-  }
+    public function getColumnsSearch()
+    {
+        return array_filter(array_map(function ($item) {
+            return (isset($item['search']['value']) && strlen($item['search']['value'])) ? $item : null;
+        }, $this->params['columns']));
+    }
 
-  public function getPage() {
-    return $this->page;
-  }
+    public function getSearchableColumns()
+    {
+        return array_filter(array_map(function ($item) {
+            return (isset($item['searchable']) && $item['searchable'] === "true") ? $item['data'] : null;
+        }, $this->params['columns']));
+    }
 
-  public function getColumnsSearch() {
-    return array_filter(array_map(function($item) {
-      return (isset($item['search']['value']) && strlen($item['search']['value'])) ? $item : null;
-    }, $this->params['columns']));
-  }
+    public function getDraw()
+    {
+        return $this->params['draw'];
+    }
 
-  public function getSearchableColumns() {
-    return array_filter(array_map(function($item) {
-      return (isset($item['searchable']) && $item['searchable'] === "true") ? $item['data'] : null;
-    }, $this->params['columns']));
-  }
+    public function getLimit()
+    {
+        return $this->params['length'];
+    }
 
-  public function getDraw() {
-    return $this->params['draw'];
-  }
+    public function getOffset()
+    {
+        return $this->params['start'];
+    }
 
-  public function getLimit() {
-    return $this->params['length'];
-  }
+    public function getColumns()
+    {
+        return $this->params['columns'];
+    }
 
-  public function getOffset() {
-    return $this->params['start'];
-  }
+    public function getColumnById($id)
+    {
+        return isset($this->params['columns'][$id]['data']) ? $this->params['columns'][$id]['data'] : null;
+    }
 
-  public function getColumns() {
-    return $this->params['columns'];
-  }
+    public function getSearch()
+    {
+        return $this->params['search'];
+    }
 
-  public function getColumnById($id) {
-    return isset($this->params['columns'][$id]['data']) ? $this->params['columns'][$id]['data'] : null;
-  }
+    public function getOrder()
+    {
+        return $this->params['order'];
+    }
 
-  public function getSearch() {
-    return $this->params['search'];
-  }
-
-  public function getOrder() {
-    return $this->params['order'];
-  }
-
-  public function getSearchValue() {
-    return isset($this->params['search']['value']) ? $this->params['search']['value'] : '';
-  }
+    public function getSearchValue()
+    {
+        return isset($this->params['search']['value']) ? $this->params['search']['value'] : '';
+    }
 }
