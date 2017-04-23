@@ -26,12 +26,12 @@ class QueryBuilder extends AdapterInterface
         $this->global_search = [];
         $this->column_search = [];
         $this->bind('global_search', false, function ($column, $search) {
-            $key = "keyg_" . str_replace(".", "", $column);
+            $key = "keyg_" . preg_replace("/[^[:alnum:][:space:]]/u", "", $column);
             $this->global_search[] = "{$column} LIKE :{$key}:";
             $this->_bind[$key] = "%{$search}%";
         });
         $this->bind('column_search', false, function ($column, $search) {
-            $key = "keyc_" . str_replace(" ", "", str_replace(".", "", $column));
+            $key = "keyc_" . str_replace(" ", "", preg_replace("/[^[:alnum:][:space:]]/u", "", $column));
             $this->column_search[] = "{$column} LIKE :{$key}:";
             $this->_bind[$key] = "%{$search}%";
         });
