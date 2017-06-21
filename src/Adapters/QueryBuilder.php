@@ -36,7 +36,7 @@ class QueryBuilder extends AdapterInterface
             $this->_bind[$key] = "%{$search}%";
         });
         $this->bind('order', false, function ($order) {
-            if (!empty($order)) {
+            if (!empty($order)&&trim(implode(', ',$order))!='asc'&&trim(implode(', ',$order))!='desc'){
                 $this->builder->orderBy(implode(', ', $order));
             }
         });
