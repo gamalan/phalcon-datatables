@@ -1,10 +1,3 @@
-
-![Build Status](https://img.shields.io/badge/branch-master-blue.svg) [![Build Status](https://travis-ci.org/m1ome/phalcon-datatables.svg?branch=master)](https://travis-ci.org/m1ome/phalcon-datatables) [![Coverage Status](https://coveralls.io/repos/m1ome/phalcon-datatables/badge.svg)](https://coveralls.io/r/m1ome/phalcon-datatables)
-
-[![Total Downloads](https://poser.pugx.org/m1ome/phalcon-datatables/downloads.svg)](https://packagist.org/packages/m1ome/phalcon-datatables)  [![License](https://poser.pugx.org/m1ome/phalcon-datatables/license.svg)](https://packagist.org/packages/m1ome/phalcon-datatables)
-[![Dependency Status](https://www.versioneye.com/user/projects/54de663d271c93aa12000002/badge.svg?style=flat)](https://www.versioneye.com/user/projects/54de663d271c93aa12000002)
-
-
 # About
 This is a [Phalcon Framework](http://phalconphp.com/) adapter for [DataTables](http://www.datatables.net/).
 # Support
@@ -12,6 +5,7 @@ This is a [Phalcon Framework](http://phalconphp.com/) adapter for [DataTables](h
 * QueryBuilder interface
 * ResultSet interface
 * Pagination
+* Raw query interface(*new)
 * Global search (by value)
 * Ordering
 * Multiple column ordering
@@ -25,7 +19,7 @@ This is a [Phalcon Framework](http://phalconphp.com/) adapter for [DataTables](h
 ```json
 {
     "require": {
-        "m1ome/phalcon-datatables": "1.*"
+        "kirimemail/phalcon-datatables": "1.*"
     }
 }
 ```
@@ -91,6 +85,24 @@ class TestController extends \Phalcon\Mvc\Controller {
 }
 ```
 
+### Controller (using Raw Query):
+```php
+<?php
+use \DataTables\DataTable;
+
+class TestController extends \Phalcon\Mvc\Controller {
+    public function indexAction() {
+        if ($this->request->isAjax()) {
+          $dataTables = new DataTable();
+          $dataTables->fromQuery([
+              "select"=> "*",
+              "from"=> "user"
+          ])->sendResponse();
+        }
+    }
+}
+```
+
 ### Model:
 ```php
 <?php
@@ -147,3 +159,5 @@ class User extends \Phalcon\Mvc\Model {
 # More examples
 For more examples please search in `site` directory.
 It contains basic *Phalcon* bootstrap page to show all Phalcon-DataTables functionality.
+
+This is fork repo from [m10me/phalcon-datatables](https://github.com/m1ome/phalcon-datatables) with some bugfix and additional methods.

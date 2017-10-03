@@ -1,5 +1,5 @@
 {
-    "name": "gamalan/phalcon-datatables",
+    "name": "kirimemail/phalcon-datatables",
     "description": "Fork of m1ome/phalcon-datatables\nA DataTables adapter for Phalcon Framework",
     "keywords": ["Phalcon", "DataTables", "Plugin"],
     "license": "MIT",
@@ -11,12 +11,16 @@
     "authors": [
       {
         "name": "Gamal Abdul Nasser",
-        "email": "gamalanpro@gmail.com"
+        "email": "gamalan@kirim.email"
+      },
+      {
+        "name": "Bagus Setiawan"
+        "email": "bagus@kirim.email"
       }
     ],
     "minimum-stability": "dev",
     "require": {
-
+        "ext-phalcon":"^3.0.0"
     },
     "extra": {
       "branch-alias": {

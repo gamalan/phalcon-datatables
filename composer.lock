@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "daee6b755c6f3dfb2833a69a1a0c7820",
+    "content-hash": "8f89679456e817a46048ab01e3d55e22",
     "packages": [],
     "packages-dev": [
         {
@@ -61,16 +61,16 @@
         },
         {
             "name": "kahlan/kahlan",
-            "version": "3.1.14",
+            "version": "3.1.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kahlan/kahlan.git",
-                "reference": "ac57e507607e3379c35d517e22573e61e826e98b"
+                "reference": "598c3682ca47fef162398a7acd706acd4fe39798"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kahlan/kahlan/zipball/ac57e507607e3379c35d517e22573e61e826e98b",
-                "reference": "ac57e507607e3379c35d517e22573e61e826e98b",
+                "url": "https://api.github.com/repos/kahlan/kahlan/zipball/598c3682ca47fef162398a7acd706acd4fe39798",
+                "reference": "598c3682ca47fef162398a7acd706acd4fe39798",
                 "shasum": ""
             },
             "require": {
@@ -111,7 +111,7 @@
                 "testing",
                 "unit test"
             ],
-            "time": "2017-04-12T13:22:10+00:00"
+            "time": "2017-08-12T20:37:11+00:00"
         }
     ],
     "aliases": [],
@@ -121,6 +121,8 @@
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "ext-phalcon": "^3.0.0"
+    },
     "platform-dev": []
 }
